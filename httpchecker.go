@@ -1,6 +1,7 @@
 package checkup
 
 import (
+	"crypto/tls"
 	"fmt"
 	"io/ioutil"
 	"net"
@@ -182,6 +183,7 @@ var DefaultHTTPClient = &http.Client{
 		DisableCompression:    true,
 		DisableKeepAlives:     true,
 		ResponseHeaderTimeout: 5 * time.Second,
+		TLSClientConfig:       &tls.Config{InsecureSkipVerify: true},
 	},
 	CheckRedirect: func(req *http.Request, via []*http.Request) error {
 		return http.ErrUseLastResponse
